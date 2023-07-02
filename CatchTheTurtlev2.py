@@ -1,17 +1,24 @@
+# import libraries
 import turtle
 import random
 
+# Screen settings
 screen = turtle.Screen()
 screen.bgcolor("light blue")
 screen.title("Catch The Turtle")
 FONT = ('Arial', 30, 'normal')
-grid_size = 15
+
+# Main turtle coordinates and list
 x_coordinate = [-20, -10, 0, 10, 20]
 y_coordinate = [-20, -10, 0, 10]
 turtle_list = []
+grid_size = 15
 score = 0
+
+# Identify score and countdown turtles
 score_turtle = turtle.Turtle()
 countdown_turtle = turtle.Turtle()
+
 game_over = False
 
 
@@ -26,6 +33,7 @@ def setup_score_turtle():
     score_turtle.write(arg="Score: 0", move=False, align='center', font=FONT)
 
 
+# Turtle maker
 def make_turtle(x, y):
     t = turtle.Turtle()
 
@@ -45,18 +53,20 @@ def make_turtle(x, y):
     turtle_list.append(t)
 
 
+# Placing main turtles on defined coordinates
 def setup_turtles():
     for x in x_coordinate:
         for y in y_coordinate:
             make_turtle(x, y)
 
 
+# Hide generated turtles
 def hide_turtles():
     for t in turtle_list:
         t.hideturtle()
 
 
-# recursive function
+# Recursive function
 def show_turtles_randomly():
     if not game_over:
         hide_turtles()
@@ -64,6 +74,7 @@ def show_turtles_randomly():
         screen.ontimer(show_turtles_randomly, 500)
 
 
+# Countdown generator
 def countdown(time):
     global game_over
     top_height = screen.window_height() / 2
@@ -84,6 +95,7 @@ def countdown(time):
         countdown_turtle.write(arg="Game Over!", move=False, align='center', font=FONT)
 
 
+# Calling all functions in a start_game function
 def start_game():
     turtle.tracer(0)
     setup_score_turtle()
